@@ -24,18 +24,41 @@ export class AppComponent {
   display4:boolean = false;
   display5:boolean = false;
   id: any;
+  active: any;
 
   displayPlay(){
-    setTimeout(()=>{    
-      this.display = true;
-    }, 3000);
+    var element = document.getElementById("play");
+    if(element == null && this.display2 == false){
+      setTimeout(()=>{    
+        this.display = true;
+      }, 3000);
+    }
   }
 
   addClass(id: any) {
     this.id = id;
-    this.display4 = true;
-    this.display3 = false;
-    this.display2 = true;
     this.display = false;
-}
+    this.display2 = true;
+    this.display3 = false;
+    this.display4 = true;
+  }
+
+  showSpanish(){
+    var element = document.getElementById("initial");
+    if(element == null){
+      this.display4 = false;
+      this.display5 = true;
+    }
+  }
+
+  shake(active: any) {
+    this.active = active;
+    setTimeout(()=>{    
+      this.active = '2';
+    }, 600);
+  }
+
+  inlove(active: any) {
+    this.active = active;
+  }
 }
