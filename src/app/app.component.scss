@@ -799,5 +799,78 @@
         background-color:#fff;
         transition: all 0.3s;
     }
-
   }
+
+#photos {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    overflow-x: hidden;
+    padding-top: 16vh;
+    /*background-color:rgb(182, 149, 192, 0.8);*/
+}
+
+.superlarge {
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.horizontal {
+    width: 100vw;
+    margin: 0;
+    padding-top: 3vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+
+    .photo{
+        position: absolute;
+        top: 35%;
+        width: 250px;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+    #photo-1{
+        background: red;
+        transform: rotate(-45deg);
+        transition: all 1s ease;
+    }
+
+    #photo-1:active{
+        transform: rotate(0deg);
+    }
+
+    #photo-2{
+        background: green;
+        transform: rotate(20deg);
+    }
+
+    #photo-2:active{
+        transform: rotate(0deg);
+    }
+
+    #photo-3{
+        background: blue;
+        transform: rotate(-60deg);
+    }
+}
+
+.entradav {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-name: aparecev;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-duration: 0.6s;
+}
+@keyframes aparecev {
+    to {
+        opacity: 1;
+    }
+}

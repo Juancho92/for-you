@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { trigger, style, animate, transition, state } from '@angular/animations';
 
 @Component({
@@ -16,8 +16,9 @@ import { trigger, style, animate, transition, state } from '@angular/animations'
   ]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'foryou';
+  once: boolean = false;
   display:boolean = false;
   display2:boolean = false;
   display3:boolean = true;
@@ -32,19 +33,49 @@ export class AppComponent {
   active4: boolean = false;
   active5: boolean = false;
   active6: boolean = false;
+  spacecrr = 0;
+  spacefn = '';
 
   @ViewChild('beyli') myDiv1: ElementRef;
   @ViewChild('bird') myDiv2: ElementRef;
   @ViewChild('gandalf') myDiv3: ElementRef;
   @ViewChild('phone') myDiv4: ElementRef;
 
+  constructor() { }
+  ngOnInit() {
+  }
+
+  swipeleft(event) {
+    console.log('<--');
+    var photos = document.getElementsByClassName("photo").length;
+    if (this.spacecrr < ((photos - 1) * 100)) {
+      this.spacecrr += 100;
+      this.spacefn = '-' + this.spacecrr + 'vw';
+    } else {
+      this.spacecrr = 0;
+      this.spacefn = '0vw';
+    }
+  }
+  swiperight(event) {
+    console.log('-->');
+    var photos = document.getElementsByClassName("photo").length;
+    if (this.spacecrr >= 0 && this.spacecrr <= ((photos - 1) * 100)) {
+      this.spacecrr -= 100;
+      this.spacefn = '-' + this.spacecrr + 'vw';
+    }
+  }
+
   displayPlay(){
     var element = document.getElementById("play");
-    if(element == null && this.display2 == false){
-      setTimeout(()=>{ 
-        this.display7 = false;   
-        this.display = true;
-      }, 2500);
+    if (!this.once){
+      this.once = true;
+      if(element == null && this.display2 == false){ 
+        this.once = true;
+        setTimeout(()=>{ 
+          this.display7 = false;  
+          this.display = true; 
+        }, 2500);
+      }
     }
   }
 
@@ -127,7 +158,7 @@ export class AppComponent {
         this.active3 = false;
         this.active5 = false;   
         this.active6 = false;
-      }, 200);
+      }, 100);
     } 
   }
 }

@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div id="draw" (click)="displayPlay()">
+  <div id="draw" (click)="displayPlay();">
     <div id="tree" class="drawPiece" (click)="shake(active=1)" [ngClass]="{'color': id === 1, 'shake': active === 1 }">
       <input type="checkbox" id="treeChk" class="chkBox">
       <label for="treeChk">
@@ -441,6 +441,20 @@
   </div>
 
   <div *ngIf="active6" id="flash">
+  </div>
+
+  <div id="photos" (swipeleft)="swipeleft($event)" (swiperight)="swiperight($event)">
+    <div class="superlarge" [style.marginLeft]="spacefn">
+        <div class="horizontal entradav">
+            <div class="photo" id="photo-1"></div>
+        </div>
+        <div class="horizontal entradav">
+          <div class="photo" id="photo-2"></div>
+        </div>
+        <div class="horizontal entradav">
+          <div class="photo" id="photo-3"></div>
+        </div>
+    </div>
   </div>
 
 </div>
