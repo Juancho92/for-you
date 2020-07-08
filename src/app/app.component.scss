@@ -28,7 +28,7 @@
 
         #draw{
             position: relative;
-            z-index: 2;
+            z-index: 3;
 
             .drawPiece{
                 position: fixed;
@@ -81,25 +81,40 @@
                 }
             }
 
-
-            #treeContent{
+            #tree{
+                z-index: 2;
                 width: 100%;
                 top: 18%;
 
-                #tree{
-                    width: 100%;
-                    height: 211px;
-                    background: url(../assets/images/tree_black.svg) center no-repeat;
-                    background-size: cover;
-                    transition: all 0.5s ease;
+                #ramas{
+                    path{fill:#111; transition: all 0.5s ease;}
+                    path.color{fill:#592f0e;}
                 }
-
-                #tree.color{
-                    background: url(../assets/images/tree.svg) center no-repeat;
+                #sakuras{
+                    .cls-1{fill:#fff; transition: all 0.5s ease;}
+                    path.color{fill:#fff;}
+                    .cls-1.color{fill:#e891a6;}
+                }
+                #centro_sakuras{
+                    path{fill:#111; transition: all 0.5s ease;}
+                    path.color{fill: #a81350;}
                 }
             }
 
-            #treeContent #tree.color.shake {
+            #tree input[type="checkbox"]:checked + label{
+                #ramas{
+                    path{fill:#592f0e;}
+                }
+                #sakuras{
+                    path{fill:#fff;}
+                    .cls-1{fill:#e891a6;}
+                }
+                #centro_sakuras{
+                    path{fill: #a81350;}
+                }
+            }
+
+            #tree.color.shake {
                 animation: shake2 0.82s cubic-bezier(.36,.07,.19,.97) both;
                 transform: translate3d(0, 0, 0);
             }
@@ -119,12 +134,6 @@
               
                 40%, 60% {
                   transform: translate3d(0, 4px, 0);
-                }
-            }
-
-            #treeContent input[type="checkbox"]:checked + label{
-                #tree{
-                    background: url(../assets/images/tree.svg) center no-repeat;
                 }
             }
 
@@ -164,6 +173,14 @@
                 }
             }
 
+            #beyli.color{
+                &:active{
+                    .nop{
+                        opacity: 0;
+                    }
+                }
+            }
+
             #gandalf{
                 width: 26%;
                 bottom: -1%;
@@ -198,7 +215,7 @@
         #playBtn{
             margin: 0px auto;
             width: 23%;
-            padding-top: 300px;
+            padding-top: 340px;
             
             svg{
                 fill: red;
@@ -238,14 +255,141 @@
         #phrase{
             position: relative;
             z-index: 2;
-            top: 30px;
             text-align: center;
+            top: 30px;
 
-            #initial{
-                font-size: 30pt;
+            #initial {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                left: 50%;
+              }
+              
+              .glitch {
+                color: black;
+                top: 15px;
+                position: relative;
+                font-size: 12vw;
                 font-weight: bold;
-                font-family: sans-serif;
-            }
+                animation: glitch 5s 5s infinite;
+              }
+              
+              .glitch::before {
+                content: attr(data-text);
+                position: absolute;
+                left: -2px;
+                text-shadow: -5px 0 #EE1D52;
+                background: white;
+                overflow: hidden;
+                top: 0;
+                animation: noise-1 3s linear infinite alternate-reverse, glitch 5s 5.05s infinite;
+              }
+              
+              .glitch::after {
+                content: attr(data-text);
+                position: absolute;
+                left: 2px;
+                text-shadow: -5px 0 #69C9D0;
+                background: white;
+                overflow: hidden;
+                top: 0;
+                animation: noise-2 3s linear infinite alternate-reverse, glitch 5s 5s infinite;
+              }
+              
+              @keyframes glitch {
+                1%{
+                  transform: rotateX(10deg) skewX(90deg);
+                }
+                2%{
+                  transform: rotateX(0deg) skewX(0deg);
+                }
+              }
+              
+              @keyframes noise-1 {
+                $steps: 30;
+                @for $i from 1 through $steps {
+                  #{percentage($i*(1/$steps))} {
+                    $top: random(100);
+                    $bottom: random(101 - $top);
+                    clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+                  }
+                }
+              }
+              
+              @keyframes noise-2 {
+                $steps: 30;
+                @for $i from 0 through $steps {
+                  #{percentage($i*(1/$steps))} {
+                    $top: random(100);
+                    $bottom: random(101 - $top);
+                    clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+                  }
+                }
+              }
+              
+              .scanlines {
+                overflow: hidden;
+                mix-blend-mode: difference;
+              }
+              
+              .scanlines::before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+              
+                background: repeating-linear-gradient(
+                  to bottom,
+                  transparent 0%,
+                  rgba(255, 255, 255, 0.05) .5%,
+                  transparent 1%
+                );
+              
+                animation: fudge 7s ease-in-out alternate infinite;
+              }
+              
+              
+              @keyframes fudge {
+                from {
+                  transform: translate(0px, 0px);
+                }
+                to {
+                  transform: translate(0px, 2%);
+                }
+              }
+              
+              .glow {
+                @extend .glitch;
+                text-shadow: 0 0 1000px rgb(223, 191, 191);
+                color: transparent;
+                position: absolute;
+                top: 0;
+              }
+
+              .subtitle {
+                top: 360px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 100;
+                font-size: 2.5vw;
+                color: black;
+                text-transform: uppercase;
+                letter-spacing: 1em;
+                text-align: center;
+                position: absolute;
+                left: 1%;
+                -webkit-animation: glitch-2 5s 5.02s infinite;
+                animation: glitch-2 5s 5.02s infinite;
+              }
+              
+              @keyframes glitch-2 {
+                1%{
+                  transform: rotateX(10deg) skewX(70deg);
+                }
+                2%{
+                  transform: rotateX(0deg) skewX(0deg);
+                }
+              }
 
             .secondary{
                 display: inline-block;
@@ -265,6 +409,11 @@
             }
 
             .secondary.second{
+                animation: typing2 3s steps(30, end),
+                blink-caret .75s step-end infinite;
+            }
+
+            .secondary.third{
                 animation: typing2 3s steps(30, end),
                 blink-caret .75s step-end infinite;
             }
@@ -401,10 +550,9 @@
         position: fixed;
         z-index: 2;
         width: 32%;
-        bottom: 30px;
+        bottom: 120px;
         left: 18%;
-        min-height: 100%;
-        overflow: hidden;
+        min-height: 30%;
         text-align: center;
            
       .x1 {
@@ -413,8 +561,8 @@
         -moz-transform: scale(0.9);
           transform: scale(0.9);
           opacity: 0.6;
-          -webkit-animation: moveclouds 15s linear infinite, sideWays 4s ease-in-out infinite alternate;
-          -moz-animation: moveclouds 15s linear infinite, sideWays 4s ease-in-out infinite alternate;
+          -webkit-animation: moveclouds 10s linear infinite, sideWays 4s ease-in-out infinite alternate;
+          -moz-animation: moveclouds 10s linear infinite, sideWays 4s ease-in-out infinite alternate;
       }
       
       .x2 {
@@ -423,8 +571,8 @@
           -moz-transform: scale(0.6);
           transform: scale(0.6);
           opacity: 0.9;
-          -webkit-animation: moveclouds 25s linear infinite, sideWays 5s ease-in-out infinite alternate;
-          -moz-animation: moveclouds 25s linear infinite, sideWays 5s ease-in-out infinite alternate;
+          -webkit-animation: moveclouds 20s linear infinite, sideWays 5s ease-in-out infinite alternate;
+          -moz-animation: moveclouds 20s linear infinite, sideWays 5s ease-in-out infinite alternate;
       }
       .x3 {
           left: 55%;
@@ -432,49 +580,61 @@
           -moz-transform: scale(0.8);
           transform: scale(0.8);
           opacity: 0.8;
-          -webkit-animation: moveclouds 20s linear infinite, sideWays 4s ease-in-out infinite alternate;
-          -moz-animation: moveclouds 20s linear infinite, sideWays 4s ease-in-out infinite alternate;
+          -webkit-animation: moveclouds 15s linear infinite, sideWays 4s ease-in-out infinite alternate;
+          -moz-animation: moveclouds 15s linear infinite, sideWays 4s ease-in-out infinite alternate;
       }
       .x4 {
-          left: 72%;
+          left: 60%;
           -webkit-transform: scale(0.75);
           -moz-transform: scale(0.75);
           transform: scale(0.75);
           opacity: 0.9;
-          -webkit-animation: moveclouds 18s linear infinite, sideWays 2s ease-in-out infinite alternate;
-          -moz-animation: moveclouds 18s linear infinite, sideWays 0zs ease-in-out infinite alternate;
+          -webkit-animation: moveclouds 13s linear infinite, sideWays 2s ease-in-out infinite alternate;
+          -moz-animation: moveclouds 13s linear infinite, sideWays 0zs ease-in-out infinite alternate;
       }
       .x5 {
-          left: 88%;
+          left: 65%;
           -webkit-transform: scale(0.8);
           -moz-transform: scale(0.8);
           transform: scale(0.8);
           opacity: 0.3; 
-          -webkit-animation: moveclouds 7s linear infinite, sideWays 1s ease-in-out infinite alternate;
-          -moz-animation: moveclouds 7s linear infinite, sideWays 1s ease-in-out infinite alternate;
+          -webkit-animation: moveclouds 2s linear infinite, sideWays 1s ease-in-out infinite alternate;
+          -moz-animation: moveclouds 2s linear infinite, sideWays 1s ease-in-out infinite alternate;
       }
       .x6 {
           left: 33%;
           opacity: 1; 
-          -webkit-animation: moveclouds 2s linear infinite, swayWays 1s ease-in-out infinite alternate;
-          animation: moveclouds 10s linear infinite, swayWays 9s ease-in-out infinite alternate;
+          -webkit-animation: moveclouds 5s linear infinite, swayWays 9s ease-in-out infinite alternate;
+          animation: moveclouds 5s linear infinite, swayWays 9s ease-in-out infinite alternate;
       }
       
       @-webkit-keyframes moveclouds { 
-          0% { 
-              top: 100px;
-          }
-          100% { 
-              top: -100px;
-          }
+            0% { 
+                top: 170px;
+                opacity: 0;
+            }
+            50% { 
+                top: 85px;
+                opacity: 1;
+            }
+            100% { 
+                top: 0px;
+                opacity: 0;
+            }
       }
       
       @keyframes moveclouds {     
           0% { 
-              top: 500px;
+              top: 170px;
+              opacity: 0;
+          }
+          50% { 
+              top: 85px;
+              opacity: 1;
           }
           100% { 
-              top: -500px;
+              top: 0px;
+              opacity: 0;
           }
       }
       
@@ -499,23 +659,23 @@
       @keyframes swayWays {
         0% {
           transform: rotate(12deg);
-          left:-0.3%;
+
         }
         33%{
           transform: rotate(-2deg);
-          left: 0.7%;
+
         }
         100% {
           transform: rotate(0deg);
-          left:-12%;
+
         }
       }
       
       /* //  HEART CODE */
       .altheart {
         background: url(http://static.indigoimages.ca/2016/shop/113439_img25_twotoneheart.png) no-repeat center;
-        width: 20px;
-        height: 17px;
+        width: 24px;
+        height: 21px;
         position: relative;
         display: block;
       }
@@ -551,6 +711,93 @@
                   transform-origin :100% 100%;
       }
 
+    }
+
+    #muzieknootjes.chirp {
+        display: block;
+        margin-left: 100px;
+        position: relative;
+        width: 20%;
+        height: 80px;
+        border: 0px solid #000;
+      
+      .noot-1,
+      .noot-2,
+      .noot-3,
+      .noot-4 {
+        position: absolute;
+        animation: notes 2s infinite linear;
+        font-size: 20px;
+        opacity: 0;
+      }
+      
+      .noot-1 {
+        top: 35px;
+        left: 0;
+        animation-delay: 0.5s;
+      }
+      
+      .noot-2 {
+        top: 5px;
+        left: 20%;
+        animation-delay: 1s;
+      }
+      
+      .noot-3 {
+        top: 45px;
+        left: 40%;
+        animation-delay: 1.5s;
+      }
+      
+      .noot-4 {
+        top: 26px;
+        left: 60%;
+        animation-delay: 2s;
+      }
+      
+      @keyframes notes {
+        0% {
+          transform: scale(1) translate(0, 0);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5) translate(50%, -50%);
+        }
+        80% {
+          opacity: 0;
+          transform: scale(1.5) translate(100%, -100%);
+        }
+        100% {
+          transform: scale(1.5) translate(100%, -100%);
+          opacity: 0;
+        }
+      }
+    }
+
+    #hey{
+        position: relative;
+        left: 115px;
+        top: 25px;
+        width: 15%;
+    }
+
+    #cloud{
+        position: absolute;
+        bottom: 190px;
+        right: 30px;
+        width: 25%;
+    }
+
+    #flash{ 
+        position:fixed; 
+        z-index: 3;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-color:#fff;
+        transition: all 0.3s;
     }
 
   }
