@@ -9,7 +9,7 @@
 
         img{
             width: 100%;
-            height: auto;
+            height: 100%;
         }
 
         .chkBox{
@@ -799,15 +799,349 @@
         background-color:#fff;
         transition: all 0.3s;
     }
+
+    #hints{
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      top: 15%;
+      text-align: center;
+
+      #closeBtn{
+        position: relative;
+        left: -50%;
+
+        svg{
+          width: 30%;
+        }
+      }
+
+
+      $width: 50px;
+      .swipe-hint{
+
+        &.swipe-horizontal{
+          position: relative;
+          left: -50%;
+          width: 100px;
+          i{
+            position: absolute;
+            display: inline-block;
+            -webkit-animation: hint-finger ease-in 2s;
+            animation: hint-finger ease-in 2s;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            z-index: 100;
+            width: 45px;
+          }
+          &:before{
+              position: absolute;
+              content: ' ';
+              background: linear-gradient(to right, rgba(136, 111, 144,1) 0%,rgba(182, 149, 192,0.5) 15%,rgba(219, 202, 224,0) 99%,rgba(236, 228, 239,0) 100%);;
+              right: 8px;
+              top: 0;
+              width: 0;
+              height: 20px;
+              animation: hint-dot ease-in 2s;
+              animation-iteration-count: infinite;
+            }
+        }
+      }
+      
+      @keyframes hint-finger{
+        0% {
+          right: 0;
+          transform: scale(1);
+        }
+        20% {
+          right: 0;
+          transform: scale(.7);
+        }
+        50% {
+          right: $width;
+          transform: scale(.7);
+        }
+        60% {
+          transform: scale(1);
+        }
+        70% {
+          right: $width;
+        }
+        100% {
+          right: 0;
+          transform: scale(1);
+        }
+      }
+      
+      @keyframes hint-dot{
+        20% {
+          opacity: 0;
+          width: 0;
+        }
+        50% {
+          opacity: .7;
+          width: $width;
+        }
+        60% {
+          opacity: 0;
+          width: $width;
+        }
+        100% {
+          opacity: 0;
+          width: 0;
+        }
+      }
+    }
+
+    #hints2{
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      top: 57%;
+      text-align: center;
+      
+      $width: 100px;
+      #rightSwipe.swipe-hint{
+
+        &.swipe-horizontal{
+          position: relative;
+          left: -50%;
+          width: 100px;
+          i{
+            position: absolute;
+            display: inline-block;
+            -webkit-animation: hint-finger ease-in 2s;
+            animation: hint-finger ease-in 2s;
+            -webkit-animation-iteration-count: 3;
+            animation-iteration-count: 3;
+            z-index: 100;
+            width: 45px;
+          }
+          &:before{
+              position: absolute;
+              content: ' ';
+              background: linear-gradient(to right, rgba(136, 111, 144,1) 0%,rgba(182, 149, 192,0.5) 15%,rgba(219, 202, 224,0) 99%,rgba(236, 228, 239,0) 100%);;
+              right: 26px;
+              top: 0;
+              width: 0;
+              height: 20px;
+              animation: hint-dot ease-in 2s;
+              animation-iteration-count: 3;
+            }
+        }
+      }
+      
+      @keyframes hint-finger{
+        0% {
+          right: 0;
+          transform: scale(1);
+        }
+        20% {
+          right: 0;
+          transform: scale(.7);
+        }
+        50% {
+          right: $width;
+          transform: scale(.7);
+        }
+        60% {
+          transform: scale(1);
+        }
+        70% {
+          right: $width;
+        }
+        100% {
+          right: 0;
+          transform: scale(1);
+        }
+      }
+      
+      @keyframes hint-dot{
+        20% {
+          opacity: 0;
+          width: 0;
+        }
+        50% {
+          opacity: .7;
+          width: $width;
+        }
+        60% {
+          opacity: 0;
+          width: $width;
+        }
+        100% {
+          opacity: 0;
+          width: 0;
+        }
+      }
+
+      #leftSwipe.swipe-hint{
+
+        &.swipe-horizontal{
+          position: relative;
+          left: -50%;
+          width: 100px;
+          i{
+            position: absolute;
+            display: inline-block;
+            -webkit-animation: hint-finger2 ease-in 2s;
+            animation: hint-finger2 ease-in 2s;
+            -webkit-animation-iteration-count: 3;
+            animation-iteration-count: 3;
+            z-index: 100;
+            width: 45px;
+          }
+          &:before{
+              position: absolute;
+              content: ' ';
+              background: linear-gradient(to left, rgba(136, 111, 144,1) 0%,rgba(182, 149, 192,0.5) 15%,rgba(219, 202, 224,0) 99%,rgba(236, 228, 239,0) 100%);;
+              left: 26px;
+              top: 0;
+              width: 0;
+              height: 20px;
+              animation: hint-dot2 ease-out 2s;
+              animation-iteration-count: 3;
+              animation-delay: .2s;
+            }
+        }
+      }
+
+      @keyframes hint-finger2{
+        0% {
+          left: 0;
+          transform: scale(1);
+        }
+        20% {
+          left: 0;
+          transform: scale(.7);
+        }
+        50% {
+          left: $width;
+          transform: scale(.7);
+        }
+        60% {
+          transform: scale(1);
+        }
+        70% {
+          left: $width;
+        }
+        100% {
+          left: 0;
+          transform: scale(1);
+        }
+      }
+      
+      @keyframes hint-dot2{
+        20% {
+          opacity: 0;
+          width: 0;
+        }
+        50% {
+          opacity: .7;
+          width: $width;
+        }
+        60% {
+          opacity: 0;
+          width: $width;
+        }
+        100% {
+          opacity: 0;
+          width: 0;
+        }
+      }
+    }
+
+    #longPhrase{
+      position: absolute;
+      top: 0px;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(	181, 130, 181, 0.9);
+      overflow: hidden;
+
+      #closeBtn{
+        position: relative;
+        width: 15%;
+        top: 20px;
+        right: 20px;
+        z-index: 5;
+        float: right;
+      }
+
+      .circle{
+        width: 500px;
+        height: 500px;
+        border-radius: 100%;
+        overflow: hidden;
+        border: 150px solid black;
+        position: absolute;
+        top: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        right: -9999px;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+
+        div{
+          top: 25%;
+          position: absolute;
+        }
+      }
+
+      p{
+
+        font-size: 22px;
+        margin: 10px 0 0 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 15em;
+        animation: type 4s steps(60, end); 
+      }
+      
+      p:nth-child(2){
+        animation: type2 8s steps(60, end);
+      }
+      
+      span{
+        animation: blink 1s infinite;
+      }
+      
+      @keyframes type{ 
+        from { width: 0; } 
+      } 
+      
+      @keyframes type2{
+        0%{width: 0;}
+        50%{width: 0;}
+        100%{ width: 100; } 
+      } 
+      
+      @keyframes blink{
+        to{opacity: .0;}
+      }
+      
+      ::selection{
+        background: black;
+      }
+
+      #fine{
+        position: relative;
+        bottom: 50px;
+        width: 50%;
+      }
+    }
   }
 
 #photos {
     position: absolute;
+    top: 0px;
     z-index: 4;
     width: 100%;
     overflow-x: hidden;
     padding-top: 16vh;
-    /*background-color:rgb(182, 149, 192, 0.8);*/
 }
 
 .superlarge {
@@ -831,34 +1165,86 @@
 
     .photo{
         position: absolute;
+        z-index: 5;
         top: 35%;
         width: 250px;
         height: 200px;
         margin: 0 auto;
+        border: 5px solid black;
+        outline: 7px solid #fff;
+        outline-offset: -8px;
     }
 
     #photo-1{
-        background: red;
+        background: white;
         transform: rotate(-45deg);
         transition: all 1s ease;
     }
 
     #photo-1:active{
+        width: 300px;
+        height: 250px;
         transform: rotate(0deg);
     }
 
     #photo-2{
-        background: green;
+        background: white;
         transform: rotate(20deg);
+        transition: all 1s ease;
     }
 
     #photo-2:active{
-        transform: rotate(0deg);
+      width: 300px;
+      height: 250px;
+      transform: rotate(0deg);
     }
 
     #photo-3{
-        background: blue;
+        background: white;
         transform: rotate(-60deg);
+        transition: all 1s ease;
+    }
+
+    #photo-3:active{
+      width: 300px;
+      height: 250px;
+      transform: rotate(0deg);
+    }
+
+    #photo-4{
+        background: white;
+        transform: rotate(30deg);
+        transition: all 1s ease;
+    }
+
+    #photo-4:active{
+      width: 300px;
+      height: 250px;
+      transform: rotate(0deg);
+    }
+
+    #photo-5{
+      background: white;
+      transform: rotate(-20deg);
+      transition: all 1s ease;
+    }
+
+    #photo-5:active{
+      width: 300px;
+      height: 250px;
+      transform: rotate(0deg);
+    }
+
+    #photo-6{
+      background: white;
+      transform: rotate(25deg);
+      transition: all 1s ease;
+    }
+
+    #photo-6:active{
+      width: 300px;
+      height: 250px;
+      transform: rotate(0deg);
     }
 }
 

@@ -11,9 +11,15 @@ import { trigger, style, animate, transition, state } from '@angular/animations'
       transition('void => *', [
         style({ opacity: 0 }), 
         animate(1000, style({opacity: 1}))
-      ]) 
+      ])
+    ]),
+    trigger('fadeOut', [ 
+      state('in', style({ opacity: 1 })),
+      transition('* => void', [
+        animate(300, style({opacity: 0}))
+      ])
     ])
-  ]
+  ] 
 })
 
 export class AppComponent implements OnInit {
@@ -33,6 +39,11 @@ export class AppComponent implements OnInit {
   active4: boolean = false;
   active5: boolean = false;
   active6: boolean = false;
+  active7: boolean = false;
+  active8: boolean = false;
+  active9: boolean = true;
+  active10: boolean = false;
+  active11: boolean = false;
   spacecrr = 0;
   spacefn = '';
 
@@ -47,6 +58,8 @@ export class AppComponent implements OnInit {
 
   swipeleft(event) {
     console.log('<--');
+    this.active9 = false;
+    this.active8 = true;
     var photos = document.getElementsByClassName("photo").length;
     if (this.spacecrr < ((photos - 1) * 100)) {
       this.spacecrr += 100;
@@ -58,6 +71,8 @@ export class AppComponent implements OnInit {
   }
   swiperight(event) {
     console.log('-->');
+    this.active9 = false;
+    this.active8 = true;
     var photos = document.getElementsByClassName("photo").length;
     if (this.spacecrr >= 0 && this.spacecrr <= ((photos - 1) * 100)) {
       this.spacecrr -= 100;
@@ -158,7 +173,39 @@ export class AppComponent implements OnInit {
         this.active3 = false;
         this.active5 = false;   
         this.active6 = false;
+        this.active7 = true;
+        this.active8 = false;
+        this.active9 = true;
       }, 100);
     } 
+  }
+
+  close(){
+    this.active7 = false;
+  }
+
+  finger(){
+    this.active9 = false;
+    this.active8 = true;
+  }
+
+  hint(){
+    if(this.myDiv4.nativeElement.classList.contains('color')){
+      if (!this.once){
+        this.once = true;
+        this.active10 = false;
+        this.active11 = true;
+        setTimeout(()=>{ 
+          this.active11 = false;
+        }, 5500);
+      } else {
+        this.once = false;
+        this.active11 = false;
+        this.active10 = true;
+        setTimeout(()=>{ 
+          this.active10 = false;
+        }, 5500);
+      }
+    }
   }
 }

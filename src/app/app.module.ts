@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoRightClickDirective } from './no-right-click.directive';
 
 // custom configuration Hammerjs
 export class HammerConfig extends HammerGestureConfig {
@@ -15,7 +16,8 @@ export class HammerConfig extends HammerGestureConfig {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NoRightClickDirective
   ],
   imports: [
     BrowserModule,
