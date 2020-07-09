@@ -1092,7 +1092,6 @@
       }
 
       p{
-
         font-size: 22px;
         margin: 10px 0 0 10px;
         white-space: nowrap;
@@ -1102,7 +1101,31 @@
       }
       
       p:nth-child(2){
-        animation: type2 8s steps(60, end);
+        opacity: 0;
+        animation: type2 4s steps(60, end);
+        animation-fill-mode: forwards;
+        animation-delay: 4s;
+      }
+
+      p:nth-child(3){
+        opacity: 0;
+        animation: type2 4s steps(60, end);
+        animation-fill-mode: forwards;
+        animation-delay: 6.5s;
+      }
+
+      p:nth-child(4){
+        opacity: 0;
+        animation: type2 4s steps(60, end);
+        animation-fill-mode: forwards;
+        animation-delay: 10.5s;
+      }
+
+      p:nth-child(5){
+        opacity: 0;
+        animation: type2 4s steps(60, end);
+        animation-fill-mode: forwards;
+        animation-delay: 14.5s;
       }
       
       span{
@@ -1114,9 +1137,8 @@
       } 
       
       @keyframes type2{
-        0%{width: 0;}
-        50%{width: 0;}
-        100%{ width: 100; } 
+        0%{width: 0; opacity: 1;}
+        100%{ width: 100; opacity: 1;} 
       } 
       
       @keyframes blink{
