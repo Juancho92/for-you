@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { trigger, style, animate, transition, state } from '@angular/animations';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
   display5:boolean = false;
   display6:boolean = false;
   display7:boolean = true;
+  display8:boolean = false;
   id: any;
   active: any;
   active2: boolean = false;
@@ -44,20 +46,34 @@ export class AppComponent implements OnInit {
   active9: boolean = true;
   active10: boolean = false;
   active11: boolean = false;
+  active12: boolean = false;
+  active13: boolean = false;
   spacecrr = 0;
   spacefn = '';
+  isChecked1 =false;
+  isChecked2 =false;
+  isChecked3 =false;
+  isChecked4 =false;
+  private: string;
+  private1: boolean = false;
 
   @ViewChild('beyli') myDiv1: ElementRef;
   @ViewChild('bird') myDiv2: ElementRef;
   @ViewChild('gandalf') myDiv3: ElementRef;
   @ViewChild('phone') myDiv4: ElementRef;
 
-  constructor() { }
+  constructor() {}
+
   ngOnInit() {
+    this.private = new URLSearchParams(window.location.search).get('password');
+    if(this.private == 'livytl93'){
+      this.private1 = true;
+    } else {
+      this.private1 = false;
+    }
   }
 
   swipeleft(event) {
-    console.log('<--');
     this.active9 = false;
     this.active8 = true;
     var photos = document.getElementsByClassName("photo").length;
@@ -70,7 +86,6 @@ export class AppComponent implements OnInit {
     }
   }
   swiperight(event) {
-    console.log('-->');
     this.active9 = false;
     this.active8 = true;
     var photos = document.getElementsByClassName("photo").length;
@@ -80,7 +95,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  displayPlay(){
+  displayPlay(){   
     var element = document.getElementById("play");
     if (!this.once){
       this.once = true;
@@ -100,6 +115,7 @@ export class AppComponent implements OnInit {
     this.display2 = true;
     this.display3 = false;
     this.display4 = true;
+    this.display8 = true;
   }
 
   showSpanish(){
@@ -167,6 +183,7 @@ export class AppComponent implements OnInit {
 
   flash(){
     if(this.myDiv4.nativeElement.classList.contains('color')){
+      this.display8 = false;
       this.active6 = true;
       setTimeout(()=>{ 
         this.active2 = false;
@@ -176,12 +193,17 @@ export class AppComponent implements OnInit {
         this.active7 = true;
         this.active8 = false;
         this.active9 = true;
+        this.active10 = false;
+        this.active11 = false;
       }, 100);
     } 
   }
 
   close(){
     this.active7 = false;
+    this.display8 = true;
+    this.active12 = false;
+    this.active13 = false;
   }
 
   finger(){
@@ -207,5 +229,35 @@ export class AppComponent implements OnInit {
         }, 5500);
       }
     }
+  }
+
+  phrase1(event){
+    this.active12 = true;
+  }
+
+  phrase2(event){
+    this.active13 = true;
+  }
+
+  refresh(){
+    this.id = 2;
+    this.once = false;
+    this.isChecked1 =false;
+    this.isChecked2 =false;
+    this.isChecked3 =false;
+    this.isChecked4 =false;
+    this.active2 = false;
+    this.active3 = false;
+    this.active5 = false;
+    this.active10 = false;
+    this.active11 = false;
+    this.display = false;
+    this.display2 = false;
+    this.display3 = true;
+    this.display4 = false;
+    this.display5 = false;
+    this.display6 = false;
+    this.display7 = true;
+    this.display8 = false;
   }
 }

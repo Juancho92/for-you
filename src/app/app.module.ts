@@ -1,10 +1,12 @@
 import { BrowserModule, HammerGestureConfig, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import * as Hammer from 'hammerjs';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoRightClickDirective } from './no-right-click.directive';
+import { RouterModule } from '@angular/router';
 
 // custom configuration Hammerjs
 export class HammerConfig extends HammerGestureConfig {
@@ -22,7 +24,9 @@ export class HammerConfig extends HammerGestureConfig {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HammerModule
+    HammerModule,
+    RouterModule.forRoot([]),
+    FormsModule
   ],
   providers: [
     {
